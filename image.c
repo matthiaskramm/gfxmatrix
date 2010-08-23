@@ -20,7 +20,10 @@
 
 #include <math.h>
 #include <assert.h>
-#include "../png.c"
+#include <memory.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include "png.h"
 #include "image.h"
 #include "stat.h"
 
@@ -162,14 +165,14 @@ bytearray_t* image_getchannel(image_t*img, int mode)
 image_t*image_load(char*filename)
 {
     image_t*img = malloc(sizeof(image_t));
-    getPNG(filename, &img->width, &img->height, (unsigned char**)&img->data);
+    png_load(filename, &img->width, &img->height, (unsigned char**)&img->data);
     return img;
 }
 
-int isfinite(double x)
+/*int isfinite(double x)
 {
     __finite(x);
-}
+}*/
 
 void image_update_from_matrix2(image_t*img, matrix_t*m, int flags, int xpos, int ypos, double min, double max)
 {
@@ -315,7 +318,7 @@ image_t*image_from_matrix(matrix_t*m, int flags)
 
 void image_save(image_t*img, char*filename) 
 {
-    writePNG(filename, (unsigned char*)img->data, img->width, img->height);
+    png_write(filename, (unsigned char*)img->data, img->width, img->height);
 }
 void image_save_and_free(image_t*img, char*filename)
 {

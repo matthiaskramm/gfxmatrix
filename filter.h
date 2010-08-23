@@ -21,7 +21,7 @@
 #ifndef __filter_h__
 #define __filter_h__
 
-#include "../common.h"
+#include "common.h"
 
 enum {filtertype_nop, filtertype_subsample, filtertype_convolve} filtertype;
 

@@ -1,13 +1,15 @@
 CC=gcc -Wimplicit -O3  -fomit-frame-pointer
 OPT=-mfpmath=sse -msse2 -mcpu=pentium4 -march=pentium4 -mtune=pentium4 -O3 -fomit-frame-pointer
 
-OBJS=texture.o image.o filter.o filter_steerpyr.o gsltools.o stat.o matrix.o corr.o gradopt.o graphcut.o filter_misc.o video.o filter_wavelet.o segment.o kmeans.o txtsynth.o
+OBJS=texture.o image.o filter.o filter_steerpyr.o gsltools.o stat.o matrix.o corr.o gradopt.o graphcut.o filter_misc.o video.o filter_wavelet.o segment.o kmeans.o txtsynth.o png.o
 LIBS=-lz -lgsl -lgslcblas -lm -lX11 -lXm -lpthread -lxml2 -lfftw3
 
-all: color imglib.a test corr matrix show_filter graphcut testwindow analysetexture edge video gfximage.so
+PYTHON_INCLUDES=-I/usr/include/python2.6
 
-color: color.c
-	$(CC) -DHAVE_GSL color.c -o color ../png.o -lgsl -lgslcblas  -lz
+all: imglib.a test corr matrix show_filter graphcut testwindow analysetexture edge video gfximage.so
+
+color: color.c png.o
+	$(CC) -DHAVE_GSL color.c -o color png.o -lgsl -lgslcblas  -lz
 
 edge: edge.c imglib.a matrix.h
 	$(CC) -DHAVE_GSL edge.c -o edge imglib.a gfxwindow.o $(LIBS)
@@ -40,8 +42,8 @@ kmeans.o: kmeans.asm kmeans.h
 video: testvideo.c imglib.a
 	$(CC) testvideo.c -o video gfxwindow.o imglib.a $(LIBS)
 
-testwindow: testwindow.c gfxwindow.o
-	$(CC) testwindow.c -o $@ gfxwindow.o $(LIBS) ../png.o
+testwindow: testwindow.c gfxwindow.o png.o
+	$(CC) testwindow.c -o $@ gfxwindow.o $(LIBS) png.o
 
 test: test.c imglib.a
 	$(CC) -DHAVE_GSL -o $@ test.c imglib.a $(LIBS)
@@ -50,7 +52,7 @@ corr: testcorr.c imglib.a
 	$(CC) -DMAIN -DHAVE_GSL -o $@ testcorr.c imglib.a $(LIBS)
 
 matrix: matrix.c image.o gsltools.o stat.o
-	$(CC) $(OPT) -DHAVE_GSL -DMAIN matrix.c image.o stat.o gradopt.o gsltools.o -o matrix $(LIBS)
+	$(CC) $(OPT) -DHAVE_GSL -DMAIN matrix.c image.o png.o stat.o gradopt.o gsltools.o -o matrix $(LIBS)
 
 show_filter: show_filter.c imglib.a
 	$(CC) -I /usr/include/libxml2/ show_filter.c -o show_filter imglib.a $(LIBS)

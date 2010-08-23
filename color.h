@@ -18,7 +18,7 @@
 #ifndef __color_h__
 #define __color_h__
 
-#include "../common.h"
+#include "common.h"
 
 cxform_t* seperateColors(image_t*img);
 void reintegrateColors(image_t*img, cxform_t*cxform);

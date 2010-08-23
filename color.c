@@ -21,11 +21,13 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
+#include <memory.h>
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_eigen.h>
 #include <assert.h>
 #include <dirent.h>
 #include "color.h"
+#include "gsltools.h"
 
 typedef RGBA gfxcolor_t;
 

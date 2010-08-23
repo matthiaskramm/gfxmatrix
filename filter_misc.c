@@ -24,9 +24,8 @@
 #include <assert.h>
 #include <math.h>
 #include "matrix.h"
-#include "../lib/matrix.h"
-#include "../lib/filter.h"
-#include "../lib/image.h"
+#include "filter.h"
+#include "image.h"
 
 static void normalize(matrix_t*m)
 {

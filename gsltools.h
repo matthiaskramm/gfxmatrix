@@ -21,6 +21,18 @@
 #ifndef __gsltools_h__
 #define __gsltools_h__
 
+#include <gsl/gsl_math.h>
+#include <gsl/gsl_vector.h>
+#include <gsl/gsl_permute_vector.h>
+#include <gsl/gsl_matrix.h>
+#include <gsl/gsl_matrix_double.h>
+#include <gsl/gsl_eigen.h>
+#include <gsl/gsl_linalg.h>
+#include <gsl/gsl_multifit.h>
+#include <gsl/gsl_cblas.h>
+#include <gsl/gsl_blas.h>
+#include <gsl/gsl_eigen.h>
+
 int my_gsl_linalg_LU_decomp(gsl_matrix * A, gsl_permutation * p, int *signum);
 int my_gsl_multifit_linear(const gsl_matrix * X,
                      const gsl_vector * y,

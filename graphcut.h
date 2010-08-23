@@ -21,7 +21,7 @@
 #ifndef __graphcut_h__
 #define __graphcut_h__
 
-#include "../common.h"
+#include "common.h"
 #include "matrix.h"
 #include "image.h"
 

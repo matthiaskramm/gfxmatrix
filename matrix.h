@@ -21,7 +21,7 @@
 #ifndef __matrix_h__
 #define __matrix_h__
 
-#include "../common.h"
+#include "common.h"
 
 void matrix_clear(matrix_t*m);
 void matrix_delete(matrix_t*m);

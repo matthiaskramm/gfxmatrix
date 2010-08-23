@@ -35,8 +35,8 @@
 #include <X11/Xatom.h>
 #include <X11/extensions/XShm.h>
 #include "gfxwindow.h"
-#include "../common.h"
-#include "../png.h"
+#include "common.h"
+#include "png.h"
 
 #define USE_SHM 1
 #define USE_PIXMAP 1 // use pixmap instead of ximage for off-screen rendering
@@ -847,7 +847,7 @@ void gfxwindow_screenshot(gfxwindow_t*win, char*filename)
         data2[y*win->width*4+x*4+2] = g;
         data2[y*win->width*4+x*4+3] = b;
     }
-    writePNG(filename, data2, win->width, win->height);
+    png_write(filename, data2, win->width, win->height);
     free(data2);
 }
 
